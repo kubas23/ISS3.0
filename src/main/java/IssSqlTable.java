@@ -149,4 +149,22 @@ public class IssSqlTable {
             System.err.println("data not loaded");
         }
     }
+
+    void deleteRecordsFromHumansTable(String url, String username, String password, String name) throws SQLException {
+        Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Humans_data WHERE name=?");
+        preparedStatement.setString(1, name);
+
+        int rowsAffected = preparedStatement.executeUpdate();
+        if (rowsAffected > 0) {
+            System.out.println("Data for " + name + " deleted successfully");
+        } else {
+            System.err.println("Data for " + name + " not found or not deleted");
+        }
+
+        connection.close();
+    }
+
+    public void insertHumansTable(String databaseUrl, String databaseUsername, String databasePassword, String testName, String testCraft) {
+    }
 }
